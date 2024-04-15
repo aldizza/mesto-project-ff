@@ -117,28 +117,24 @@ const modalImage = popupImg.querySelector('.popup__image');
 const caption = popupImg.querySelector('.popup__caption');
 const cardImage = popupImg.querySelector('.card__image');
 
+function openModalImg(imageUrl, imageAlt) {
+    modalImage.src = imageUrl;
+    modalImage.alt = imageAlt;
+    caption.textContent = imageAlt;
+    openModal(popupImg);
+    popupImg.classList.add('popup_is-animated')
+}
+
+cardImage.addEventListener('click', () => {
+    clickImageHandler(dataCard); 
+    openModal(popupImg);
+});
 
 function clickImageHandler(dataCard) {
     const imageUrl = dataCard.link;
     const imageAlt = dataCard.name;
     openModalImg(imageUrl, imageAlt);
 }
-
-function openModalImg(imageUrl, imageAlt) {
-    modalImage.src = imageUrl;
-    modalImage.alt = imageAlt;
-    caption.textContent = imageAlt; 
-    popupImg.classList.add('popup_is-opened');
-    popupImg.classList.add('popup_is-animated');
-}
-  
-function closeModalImg(evt) {
-    if (evt.key === 'Escape') {
-        closeModal(popupImg);
-    }
-}
-
-document.addEventListener('keydown', closeModalImg);
 
 
 
