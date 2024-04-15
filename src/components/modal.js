@@ -3,7 +3,6 @@ export {openModal, closeModal};
 function openModal(target) {
     target.classList.add('popup_is-opened');
     addEscapeListener();
-    clearFormInputs(); 
     document.addEventListener('click', closePopupByCrossButton);
     document.addEventListener('click', overlayClick); 
 }
@@ -15,7 +14,6 @@ function closeModal(target) {
     document.removeEventListener('click', overlayClick);
 }
 
-
 function addEscapeListener() {
     document.addEventListener('keydown', handleEscape);
 }
@@ -26,20 +24,10 @@ function removeEscapeListener() {
 
 function handleEscape(event) {
     if (event.key === 'Escape') {
-        const openedPopups = document.querySelectorAll('.popup_is-opened');
-        openedPopups.forEach(popup => {
-            closeModal(popup);
-        });
+        const popup = document.querySelector('.popup_is-opened');
+        closeModal(popup);
     }
 }
-
-function clearFormInputs() {
-    const cardNameInput = document.querySelector('.popup__input_type_card-name');
-    const urlInput = document.querySelector('.popup__input_type_url');
-    cardNameInput.value = '';
-    urlInput.value = '';
-}
-
 
 function overlayClick(evt) {
     const target = evt.target;
@@ -54,4 +42,3 @@ function closePopupByCrossButton(evt) {
         closeModal(target.closest('.popup'));
     }
 }
-

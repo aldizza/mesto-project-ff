@@ -34,12 +34,6 @@ function deleteCard(cardElement) {
   cardElement.remove();
 }
 
-const likeButtons = document.querySelectorAll('.card__like-button');
-
-likeButtons.forEach(button => {
-  button.addEventListener('click', likeHandler);
-});
-
 function likeHandler(evt) {
   const likeButton = evt.target; 
 
@@ -49,7 +43,3 @@ function likeHandler(evt) {
       likeButton.classList.add('card__like-button_is-active');
   }
 }
-
-
-
-

@@ -22,10 +22,8 @@ profileEditButton.addEventListener('click', () => {
 
 profileAddbutton.addEventListener('click', () => {
     openModal(popupTypeNewCard);
+    formAddCard.reset();
 });
-
-
-// Закрытие попапа
 
 //  Редактирование профиля
 const nameInput = document.querySelector('.popup__input_type_name'); 
@@ -56,10 +54,7 @@ formEditProfile.addEventListener('submit', submitEditProfileForm);
 const formAddCard = document.forms['new-place']; // получаем форму
 const cardNameInput = formAddCard.querySelector('.popup__input_type_card-name');
 const urlInput = formAddCard.querySelector('.popup__input_type_url');
-const formNewPlace = document.forms['new-place'];
 const cardsContainer = document.querySelector('.places__list');
-
-const newCardPopup = document.querySelector('.popup_type_new-card');
 
 function submitFormCard(evt) {
     evt.preventDefault();
@@ -73,8 +68,8 @@ function submitFormCard(evt) {
     if (imageUrl) {
         const newCard = createCard(dataCard, deleteCard, likeHandler, clickImageHandler);
         cardsContainer.prepend(newCard);
-        evt.target.reset();
-        closeModal(newCardPopup);
+        evt.target.reset(); 
+        closeModal(popupTypeNewCard);
     }
 }
 
