@@ -39,17 +39,18 @@ function fillInEditProfileFormInputs() {
     jobInput.value = profileDescription.textContent;
 }
 
+const editProfilePopup = document.querySelector('.popup_type_edit');
+
 function submitEditProfileForm(evt) {
     evt.preventDefault(); 
     const jobValue = jobInput.value;
     const nameValue = nameInput.value;
     profileTitle.textContent = nameValue;
     profileDescription.textContent = jobValue;
-    closeModal(formEditProfile.closest('.popup'));
+    closeModal(editProfilePopup);
 }
 
 formEditProfile.addEventListener('submit', submitEditProfileForm);
-
 
  // Добавление карточки
 const formAddCard = document.forms['new-place']; // получаем форму
@@ -57,6 +58,8 @@ const cardNameInput = formAddCard.querySelector('.popup__input_type_card-name');
 const urlInput = formAddCard.querySelector('.popup__input_type_url');
 const formNewPlace = document.forms['new-place'];
 const cardsContainer = document.querySelector('.places__list');
+
+const newCardPopup = document.querySelector('.popup_type_new-card');
 
 function submitFormCard(evt) {
     evt.preventDefault();
@@ -71,7 +74,7 @@ function submitFormCard(evt) {
         const newCard = createCard(dataCard, deleteCard, likeHandler, clickImageHandler);
         cardsContainer.prepend(newCard);
         evt.target.reset();
-        closeModal(formNewPlace.closest('.popup'));
+        closeModal(newCardPopup);
     }
 }
 
