@@ -24,11 +24,12 @@
   }
 }
 
-.popup__error_visible {
+.popup__input_type_error {
   border-bottom-color: rgba(255, 0, 0, 1);
 }
 
-.popup__input_type_error {
+.popup__error_visible  {
   color: rgba(255, 0, 0, 1);
   font-size: 12px;
 }
+

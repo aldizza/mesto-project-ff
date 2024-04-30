@@ -23,9 +23,9 @@ profileEditButton.addEventListener('click', () => {
 });
 
 profileAddbutton.addEventListener('click', () => {
-    openModal(popupTypeNewCard);
-    clearValidation(formAddCard, validationConfig);
     formAddCard.reset();
+    clearValidation(formAddCard, validationConfig);
+    openModal(popupTypeNewCard);
 });
 
 //  Редактирование профиля
@@ -93,7 +93,6 @@ function openModalImg(imageUrl, imageAlt) {
     caption.textContent = imageAlt;  
     openModal(popupImg);
 }
-
 
 //Валидация 
 
