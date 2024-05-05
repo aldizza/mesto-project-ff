@@ -52,7 +52,7 @@ function addNewCard(name, link) {
     }).then((res) => checkRes(res));
 }
 
- function deleteCard(cardId) {
+function deleteCard(cardId) {
     return fetch(`${config.baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: config.headers,

@@ -47,7 +47,7 @@ function submitEditProfileForm(evt) {
     const jobValue = jobInput.value;
     const nameValue = nameInput.value;
 
-    const submitButton = evt.target.querySelector('button[type="submit"]');
+    const submitButton = evt.submitter;
     submitButton.textContent = 'Сохранение...';
 
     editProfileInfo(nameValue, jobValue)
@@ -91,7 +91,7 @@ function submitFormCard(evt) {
                     owner: {"_id": res.owner._id},
                     _id: res._id
                 };
-                const newCard = createCard(dataCard, res.owner._id);
+                const newCard = createCard(dataCard, res.owner._id, clickImageHandler);
                 placesList.prepend(newCard);
                 evt.target.reset(); 
                 closeModal(popupTypeNewCard);
@@ -112,7 +112,7 @@ const popupImg = document.querySelector('.popup_type_image');
 const modalImage = popupImg.querySelector('.popup__image');
 const caption = popupImg.querySelector('.popup__caption');
 
-export function clickImageHandler(dataCard) { 
+function clickImageHandler(dataCard) { 
     const imageUrl = dataCard.link; 
     const imageAlt = dataCard.name; 
     openModalImg(imageUrl, imageAlt); 
@@ -130,27 +130,28 @@ const formAddprofileAvatar = document.forms['new-avatar'];
 const urlInputAvatar = formAddprofileAvatar.querySelector('.popup__input_type_url_avatar');
 const profileImage = document.querySelector('.profile__image');
 
-
 function submitFormAvatar(evt) {
     evt.preventDefault();
 
     const imageUrl = urlInputAvatar.value;
     if (imageUrl) {
-
         evt.target.querySelector('button[type="submit"]').textContent = 'Сохранение...';
 
-        profileImage.style.backgroundImage = `url('${imageUrl}')`;
         updateUserAvatar(imageUrl)
             .then(() => {
                 console.log('Аватар успешно обновлен');
-            })
-            .catch((error) => {
-                console.error('Ошибка при добавлении аватара:', error);
-            })
-            .finally(() => {
-                evt.target.querySelector('button[type="submit"]').textContent = 'Сохранить';
+                profileImage.style.backgroundImage = `url('${imageUrl}')`;
+                if (condition) {
+                    
+                } else {
+    
+                }evt.target.querySelector('button[type="submit"]').textContent = 'Сохранить';
                 evt.target.reset();
                 closeModal(popupAvatar);
+            })
+            .catch((error) => {
+                console.error('Ошибка при  аватара:', error);
+                evt.target.querySelector('button[type="submit"]').textContent = 'Сохранить';
             });
     }
 }
@@ -178,6 +179,8 @@ Promise.all([getUserInfo(), getInitialCards()])
   .catch((err) => {
     console.error('Ошибка при загрузке данных:', err);
   });
+
+  export { clickImageHandler };
 
 
   

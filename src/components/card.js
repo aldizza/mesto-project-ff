@@ -1,14 +1,16 @@
 import { deleteCard, addLike, removeLike } from "./api.js";
+import { clickImageHandler } from "./index.js";
 
 const cardTemplate = document.querySelector('#card-template').content;
 
-function createCard(dataCard, myId, clickImageHandler) {
+function createCard(dataCard, myId) {
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const cardImage = cardElement.querySelector('.card__image');
   const cardTitle = cardElement.querySelector('.card__title');
   const cardDeleteButton = cardElement.querySelector('.card__delete-button');
 
   cardImage.src = dataCard.link;
+  cardImage.alt = "Изображение памятного места" + dataCard.name;
   cardTitle.textContent = dataCard.name;
 
   const ownerId = dataCard.owner._id;
@@ -16,12 +18,17 @@ function createCard(dataCard, myId, clickImageHandler) {
 
   if (myId === ownerId) {
     cardDeleteButton.addEventListener('click', () => {
-        deleteCard(cardId);
-        cardElement.remove();
+          deleteCard(cardId)
+            .then((res) => {
+                cardElement.remove();
+            })
+            .catch((error) => {
+                console.error('Ошибка при удалении карточки:', error);
+            })
     });
-} else {
+  } else {
     cardDeleteButton.remove();
-}
+  }
  
   //лайки карточек
   const cardLikebutton = cardElement.querySelector('.card__like-button');
@@ -74,6 +81,5 @@ function createCard(dataCard, myId, clickImageHandler) {
 
   return cardElement;
 };
-
 
 export {createCard};
