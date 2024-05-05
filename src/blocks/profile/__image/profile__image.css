@@ -7,6 +7,10 @@
   background-size: cover;
   background-position: center;
   margin: 0 29px 0 0;
+
+  position: relative;
+  display: inline-block;
+  cursor: url('/src/images/Vector.png'), auto; 
 }
 
 @media screen and (max-width: 740px) {
@@ -19,4 +23,8 @@
   .profile__image {
     margin-right: 0;
   }
+}
+
+.profile__image:hover .edit-icon {
+  display: block;
 }
