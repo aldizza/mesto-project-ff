@@ -1,5 +1,4 @@
 import { deleteCard, addLike, removeLike } from "./api.js";
-// import { clickImageHandler } from "./index.js";
 
 const cardTemplate = document.querySelector('#card-template').content;
 
@@ -21,7 +20,7 @@ function createCard(dataCard, myId, clickImageHandler) {
         cardElement.remove();
     });
 } else {
-    cardDeleteButton.remove(); // Скрываем кнопку удаления на чужих карточках
+    cardDeleteButton.remove();
 }
  
   //лайки карточек
@@ -34,7 +33,7 @@ function createCard(dataCard, myId, clickImageHandler) {
     if (cardLikebutton.classList.contains('card__like-button_is-active')) {
       removeLike(cardId)
         .then((counterLike) => {
-          updateUI(counterLike); // Обновляем интерфейс
+          updateUI(counterLike); 
         })
         .catch((error) => {
           console.error(error);
@@ -42,7 +41,7 @@ function createCard(dataCard, myId, clickImageHandler) {
     } else {
       addLike(cardId)
         .then((counterLike) => {
-          updateUI(counterLike, myId); // Обновляем интерфейс
+          updateUI(counterLike, myId); 
         })
         .catch((error) => {
           console.error(error);
@@ -51,6 +50,7 @@ function createCard(dataCard, myId, clickImageHandler) {
   });
   
   const counterElement = cardElement.querySelector('.counter__likes');
+
   // Функция для обновления интерфейса на основе обновленной карточки
   function updateUI(counterLike, myId) {
     const cardLikeButton = cardElement.querySelector('.card__like-button');
@@ -68,7 +68,6 @@ function createCard(dataCard, myId, clickImageHandler) {
   //кол-во лайков с сервера
   counterElement.textContent = dataCard.likes && Array.isArray(dataCard.likes) ? dataCard.likes.length : 0;
 
-  // слушатель открытия карточки
   cardImage.addEventListener('click', function () {
     clickImageHandler(dataCard);
   });

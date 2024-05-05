@@ -1,4 +1,3 @@
-// import {initialCards} from './card.js';
 import {createCard} from './card.js';
 import {openModal, closeModal} from './modal.js';
 import { clearValidation, enableValidation, validationConfig } from './validation.js';
@@ -48,6 +47,7 @@ function submitEditProfileForm(evt) {
     const jobValue = jobInput.value;
     const nameValue = nameInput.value;
 
+    const submitButton = evt.target.querySelector('button[type="submit"]');
     submitButton.textContent = 'Сохранение...';
 
     editProfileInfo(nameValue, jobValue)
@@ -148,7 +148,6 @@ function submitFormAvatar(evt) {
                 console.error('Ошибка при добавлении аватара:', error);
             })
             .finally(() => {
-                // Восстанавливаем исходный текст кнопки после завершения загрузки
                 evt.target.querySelector('button[type="submit"]').textContent = 'Сохранить';
                 evt.target.reset();
                 closeModal(popupAvatar);
@@ -164,15 +163,13 @@ enableValidation(validationConfig);
 //Выводим инфо о пользователе и карточках на страницу
 Promise.all([getUserInfo(), getInitialCards()])
   .then(([profileData, cardsData]) => {
-    // Получаем ID пользователя
+
     const myId = profileData._id;
 
-    // Отображаем информацию о пользователе
     profileImage.style.backgroundImage = `url(${profileData.avatar})`;
     profileTitle.textContent = profileData.name;
     profileDescription.textContent = profileData.about;
 
-    // Отображаем карточки на странице
     cardsData.forEach((cardData) => {
       const cardElement = createCard(cardData, myId, clickImageHandler); 
       placesList.append(cardElement);
