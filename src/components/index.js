@@ -141,16 +141,12 @@ function submitFormAvatar(evt) {
             .then(() => {
                 console.log('Аватар успешно обновлен');
                 profileImage.style.backgroundImage = `url('${imageUrl}')`;
-                if (condition) {
-                    
-                } else {
-    
-                }evt.target.querySelector('button[type="submit"]').textContent = 'Сохранить';
+                evt.target.querySelector('button[type="submit"]').textContent = 'Сохранить';
                 evt.target.reset();
                 closeModal(popupAvatar);
             })
             .catch((error) => {
-                console.error('Ошибка при  аватара:', error);
+                console.error('Ошибка при обновлении аватара:', error);
                 evt.target.querySelector('button[type="submit"]').textContent = 'Сохранить';
             });
     }
